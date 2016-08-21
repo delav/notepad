@@ -41,16 +41,6 @@ def new():
     textPad.delete(1.0, END)
 
 
-# def save():
-#     value = textPad.get().strip()
-#     if value:
-#         f = open(value, 'w')
-#         f.write(textPad.get('1.0', END).strip() + '\n')
-#         f.close()
-#     else:
-#         save_as()
-
-
 def save():
     global filename
     if filename:
@@ -122,7 +112,15 @@ def bg_color():
 
 
 def fn_color():
-    textPad.config(fg='#FFFFFF')
+    textPad.config(fg='red')
+
+
+def type():
+    textPad.config(font='楷体')
+
+
+def size():
+    textPad.config(font='18')
 
 
 def ex_quit():
@@ -159,11 +157,11 @@ editmenu.add_command(label='全选', accelerator='Ctrl+A', command=seleteAll)
 
 fontmenu = Menu(root)
 menubar.add_cascade(label='字体', menu=fontmenu)
-fontmenu.add_command(label='样式')
-fontmenu.add_command(label='大小')
-fontmenu.add_command(label='颜色', command=fn_color)
+fontmenu.add_command(label='楷体', command=type)
+fontmenu.add_command(label='大小', command=size)
+fontmenu.add_command(label='红色字体', command=fn_color)
 fontmenu.add_separator()
-fontmenu.add_command(label='背景颜色', command=bg_color)
+fontmenu.add_command(label='浅蓝背景', command=bg_color)
 
 aboutmenu = Menu(root)
 menubar.add_cascade(label='关于', menu=aboutmenu)
@@ -184,7 +182,7 @@ textPad = Text(root, undo=True)
 textPad.pack(expand=YES, fill=BOTH)
 
 scroll = Scrollbar(textPad)
-textPad.config(yscrollcommand=scroll.set, bg='#B0E0E6', fg="#FFFFFF", font=18)
+textPad.config(yscrollcommand=scroll.set)
 scroll.config(command=textPad.yview)
 scroll.pack(side=RIGHT, fill=Y)
 
